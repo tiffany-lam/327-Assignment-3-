@@ -18,5 +18,5 @@ should be something like: `C:\Program Files\Java\jdk1.8.0_152\bin`
 8. Now compile your java file, cd into where you saved **EchoClient.java**
 9. Once you're in the correct directory type: `javac EchoClient.java` and hit enter. This will compile the code.
 10. Now type `java EchoClient` hit enter
-11. Fill out the IP address, port number, and a message by following along with what the program asks for. 
+11. Fill out the IP address (make sure it's public, recomended using ipconfig and using your ipv4 address) , port number (same as the one you entered for server), and a message by following along with what the program asks for. 
 12. You should now be able to see the message you sent being received in the server command line and the message redisplayed in your client command line. 
