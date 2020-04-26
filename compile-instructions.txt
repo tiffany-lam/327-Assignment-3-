@@ -1,0 +1,21 @@
+Interprocess Communication | Echo Client and an Echo Server program using UDP
+
+By Jainee Shah and Tiffany Lam
+
+CECS 327 | Section 01
+
+Instructions for Users
+How to run and compile EchoClient.java and EchoServer.java
+
+Find where your java jdk bin folder is located. Copy that path, should be something like: C:\Program Files\Java\jdk1.8.0_152\bin
+Open a command line
+Type set path="<your path>" paste the path you copied from step 1. where <your path> is. Click enter. Now path is set.
+Now compile your java file, cd into wherever you saved EchoServer.java
+Once you're in the correct directory type: javac EchoServer.java and hit enter. This will compile the code.
+Now type java EchoServer <port> replace <port> with the port you want for your server.
+Open another command line and repeat steps 1-3
+Now compile your java file, cd into where you saved EchoClient.java
+Once you're in the correct directory type: javac EchoClient.java and hit enter. This will compile the code.
+Now type java EchoClient hit enter
+Fill out the IP address (make sure it's public, recomended using ipconfig and using your ipv4 address) , port number (same as the one you entered for server), and a message by following along with what the program asks for.
+You should now be able to see the message you sent being received in the server command line and the message redisplayed in your client command line.
