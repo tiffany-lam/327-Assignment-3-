@@ -14,7 +14,7 @@ public class EchoServer {
 			System.out.println("Please enter: java EchoServer <port> ");
 			return;
 		}
-		//inistalize server socket
+		//initialize server socket
 		DatagramSocket socket = null;
 		//now send the message to our server
 		try {
@@ -25,7 +25,7 @@ public class EchoServer {
 			
 			while(true) {
 				
-				byte[] buffer = new byte[256]; //byte has 256 distinct values this will hold the message
+				byte[] buffer = new byte[1000]; //byte to hold message
 				DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 				// .receive - receives a datagram packet from this socket
 				// returns - the DatagramPacket's buffer is filled w/ data received. 
@@ -53,7 +53,11 @@ public class EchoServer {
 		}catch(IOException exception) {
 			System.out.println("IOException: " + exception.getMessage());
 		}finally {
-			socket.close();
+			//close the socket
+			if(socket != null) {
+				socket.close();
+			}
+			
 		}
 
 	}
