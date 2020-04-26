@@ -6,7 +6,7 @@
  CECS 327 | Section 01
  
 ## Instructions for Users
- How to run and compile EchoClient.java and EchoServer.java
+ How to run and compile **EchoClient.java** and **EchoServer.java**
 1. Find where your java jdk bin folder is located. Copy that path,
 should be something like: `C:\Program Files\Java\jdk1.8.0_152\bin`
 2. Open a command line
