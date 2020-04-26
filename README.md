@@ -10,7 +10,7 @@
 1. Find where your java jdk bin folder is located. Copy that path,
 should be something like: `C:\Program Files\Java\jdk1.8.0_152\bin`
 2. Open a command line
-3. Type `set path = "<your path>"` paste the path you copied from step 1. where `<your path>` is. Click enter. Now path is set.
+3. Type `set path="<your path>"` paste the path you copied from step 1. where `<your path>` is. Click enter. Now path is set.
 4. Now compile your java file, cd into wherever you saved **EchoServer.java**
 5. Once you're in the correct directory type: `javac EchoServer.java` and hit enter. This will compile the code.
 6. Now type `java EchoServer <port>` where `<port>` is port you want for your server. 
