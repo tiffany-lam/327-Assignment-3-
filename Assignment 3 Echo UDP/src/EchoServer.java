@@ -14,12 +14,13 @@ public class EchoServer {
 			System.out.println("Please enter: java EchoServer <port> ");
 			return;
 		}
-
+		//inistalize server socket
+		DatagramSocket socket = null;
 		//now send the message to our server
 		try {
 			//get the port from the Client
 			int port = Integer.parseInt(args[0]); //convert the argument to integer
-			DatagramSocket socket = new DatagramSocket(port);
+			socket = new DatagramSocket(port);
 			
 			
 			while(true) {
@@ -46,10 +47,13 @@ public class EchoServer {
 			}
 			
 			
+			
 		}catch(SocketException exception) { //catch any socket exceptions when creating our server
 			System.out.println("SOCKET ERROR: " + exception.getMessage());
 		}catch(IOException exception) {
 			System.out.println("IOException: " + exception.getMessage());
+		}finally {
+			socket.close();
 		}
 
 	}
