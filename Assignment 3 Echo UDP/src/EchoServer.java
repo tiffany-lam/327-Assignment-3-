@@ -21,6 +21,7 @@ public class EchoServer {
 			int port = Integer.parseInt(args[0]); //convert the argument to integer
 			DatagramSocket socket = new DatagramSocket(port);
 			
+			
 			while(true) {
 				
 				byte[] buffer = new byte[256]; //byte has 256 distinct values this will hold the message
@@ -44,12 +45,13 @@ public class EchoServer {
 				socket.send(response);
 			}
 			
-		} catch(SocketException exception) { //catch any socket exceptions when creating our server
+			
+		}catch(SocketException exception) { //catch any socket exceptions when creating our server
 			System.out.println("SOCKET ERROR: " + exception.getMessage());
 		}catch(IOException exception) {
 			System.out.println("IOException: " + exception.getMessage());
 		}
-					
+
 	}
 
 }
