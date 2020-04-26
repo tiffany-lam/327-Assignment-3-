@@ -22,16 +22,18 @@ public class EchoServer {
 			DatagramSocket socket = new DatagramSocket(port);
 			
 			while(true) {
+				
 				byte[] buffer = new byte[256]; //byte has 256 distinct values this will hold the message
 				DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 				// .receive - receives a datagram packet from this socket
 				// returns - the DatagramPacket's buffer is filled w/ data received. 
 				// Datagram contains sender's IP address and port from sender's machine
-				socket.receive(packet);
-				System.out.println("Data recieved!");
+				socket.receive(packet); //blocks until a datagram is received 
 				//======================= NOW we must get the data fromt eh packet and the ip address and port ================= 
 				//returns the data or message from the client
 				buffer = packet.getData(); 
+				String message = new String(buffer);
+				System.out.println("Data recieved! Your message from client is: " + message);
 				//returns the IP address of the machine to which the datagram was received from 
 				InetAddress clientIP = packet.getAddress();
 				//returns the port to which the datagram was received from 
