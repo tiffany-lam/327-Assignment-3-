@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.net.*; 
 import java.util.*;
+import java.util.*;
+import java.util.Scanner;
 //In this class we will receive the data from the client and then
 //echo it back to the client by using the same socket
 // when the server receives a message from the client, the server echoes the message to the same client. 
@@ -9,17 +11,24 @@ public class EchoServer {
 	
 	public static void main(String[] args) {
 		//check to make sure the user passes in a port 
-		if (args.length != 1) {
-			System.out.println("ERROR: missing the port number.");
-			System.out.println("Please enter: java EchoServer <port> ");
-			return;
-		}
+		/*
+		 * if (args.length != 1) {
+		 * System.out.println("ERROR: missing the port number.");
+		 * System.out.println("Please enter: java EchoServer <port> "); return; }
+		 */
 		//initialize server socket
 		DatagramSocket socket = null;
+		Scanner scanner = new Scanner(System.in);  //initializing scanner for input outputs in the program 
+		//ask user for port number 
+		System.out.println("Please enter port number for the server:");
+		//takes user input 
+		String portInput = scanner.nextLine();
+		int port = Integer.parseInt(portInput);
 		//now send the message to our server
 		try {
 			//get the port from the Client
-			int port = Integer.parseInt(args[0]); //convert the argument to integer
+			//int port = Integer.parseInt(args[0]); // convert the argument to integer
+			
 			socket = new DatagramSocket(port);
 			
 			

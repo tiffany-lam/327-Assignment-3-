@@ -81,7 +81,7 @@ public class EchoClient {
 		//converts data to string type in order to print it to the screen 
 		String Servermessage = new String(Dpreciever.getData());
 		//prints the received message from the server side 
-		System.out.println("From Server side:  " + Servermessage);
+		System.out.println("Server sent back:  " + Servermessage);
 		socket.close(); //close the socket 
 		
 		}	
