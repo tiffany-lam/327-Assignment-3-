@@ -40,51 +40,60 @@ public class EchoClient {
 			//it changes the portnumbercheck to false which basically means that port number was not entered correctly 
 			PortNumbercheck = false;
 		}
-		//prompts the user to enter the message that they would like to send to the server 
-		System.out.println("Please enter the message you would like to send to that server:");
-		//saves user input in string format 
-		String message = scanner.nextLine();
-		//converts string to byte array as socket and pocket works with byte arguments 
-		byte buf[] = message.getBytes(); //conversion 
-		//checks if either or both IPaddress and Port number were entered correctly
-		//if any of them was not entered correctly, it will show error message on the screen and would not send the messge to the servr
-		if (!IPAddresscheck || !PortNumbercheck) {
-			//if both of them were not entered correctly, it will fall under this condition 
-			if (!IPAddresscheck && !PortNumbercheck) {
-				System.out.println("ERROR: IP Address and Port number were not entered correctly so we CANNOT Proceed!");
+		boolean notDone = true;
+		while(notDone == true) {
+			//prompts the user to enter the message that they would like to send to the server 
+			System.out.println("Please enter the message you would like to send to that server (Enter '0' when done or ^C (ctrl-C):");
+			//saves user input in string format 
+			String message = scanner.nextLine();
+			if (message == "0") {
+				
+				socket.close();
+				break;
 			}
-			//else if ONLY IP address was not entered correctly it will give an error message 
-		    else if (!IPAddresscheck) {
-				System.out.println("ERROR: IP Address was not entered correctly so we CANNOT Proceed!");
+			//converts string to byte array as socket and pocket works with byte arguments 
+			byte buf[] = message.getBytes(); //conversion 
+			//checks if either or both IPaddress and Port number were entered correctly
+			//if any of them was not entered correctly, it will show error message on the screen and would not send the messge to the servr
+			if (!IPAddresscheck || !PortNumbercheck) {
+				//if both of them were not entered correctly, it will fall under this condition 
+				if (!IPAddresscheck && !PortNumbercheck) {
+					System.out.println("ERROR: IP Address and Port number were not entered correctly so we CANNOT Proceed!");
+				}
+				//else if ONLY IP address was not entered correctly it will give an error message 
+			    else if (!IPAddresscheck) {
+					System.out.println("ERROR: IP Address was not entered correctly so we CANNOT Proceed!");
+				}
+				//else if ONLY port number was not entered correctly it will give this error 
+				else if (!PortNumbercheck) {
+					System.out.println("ERROR: Port Number was not entered correctly so we CANNOT Proceed!");
+				}
+				
 			}
-			//else if ONLY port number was not entered correctly it will give this error 
-			else if (!PortNumbercheck) {
-				System.out.println("ERROR: Port Number was not entered correctly so we CANNOT Proceed!");
-			}
+			//now if everything was entered correctly it will proceed with send/ receive data 
+			else {
+			// convertng entered IPAddress to InetAddress to have it pass to packet 
+			InetAddress ipaddress = InetAddress.getByName(IPAddress); 
+			//pass arguments in this order
+			// 1. message, 2. length of message, 3. IPaddress, 4. Port number
+			DatagramPacket DpSend = new DatagramPacket(buf, buf.length, ipaddress, Port);
+			//socket sends of the dpSend to server
+			socket.send(DpSend);
+			//initializing server message with 1024 size byte array 
+			byte reciever[] = new byte[1024];
+			//Packet initializer with 1. receiver message and 2. length of receiver message arguments
+			DatagramPacket Dpreciever = new DatagramPacket(reciever, reciever.length);
+			//socket receives dpreciever
+			socket.receive(Dpreciever);
+			//converts data to string type in order to print it to the screen 
+			String Servermessage = new String(Dpreciever.getData());
+			//prints the received message from the server side 
+			System.out.println("Server sent back:  " + Servermessage);
+			//socket.close(); //close the socket 
 			
+			}	
 		}
-		//now if everything was entered correctly it will proceed with send/ receive data 
-		else {
-		// convertng entered IPAddress to InetAddress to have it pass to packet 
-		InetAddress ipaddress = InetAddress.getByName(IPAddress); 
-		//pass arguments in this order
-		// 1. message, 2. length of message, 3. IPaddress, 4. Port number
-		DatagramPacket DpSend = new DatagramPacket(buf, buf.length, ipaddress, Port);
-		//socket sends of the dpSend to server
-		socket.send(DpSend);
-		//initializing server message with 1024 size byte array 
-		byte reciever[] = new byte[1024];
-		//Packet initializer with 1. receiver message and 2. length of receiver message arguments
-		DatagramPacket Dpreciever = new DatagramPacket(reciever, reciever.length);
-		//socket receives dpreciever
-		socket.receive(Dpreciever);
-		//converts data to string type in order to print it to the screen 
-		String Servermessage = new String(Dpreciever.getData());
-		//prints the received message from the server side 
-		System.out.println("Server sent back:  " + Servermessage);
-		socket.close(); //close the socket 
 		
-		}	
 	}
 	/**
 	 * This helper method validates if passed IPAddress was entered correctly (i.e. in correct IPV4 and valid address)
