@@ -43,14 +43,9 @@ public class EchoClient {
 		boolean notDone = true;
 		while(notDone == true) {
 			//prompts the user to enter the message that they would like to send to the server 
-			System.out.println("Please enter the message you would like to send to that server (Enter '0' when done or ^C (ctrl-C)):");
+			System.out.println("Please enter the message you would like to send to that server (Enter ^C (ctrl-C)):");
 			//saves user input in string format 
 			String message = scanner.nextLine();
-			if (message == "0") {
-				
-				socket.close();
-				break;
-			}
 			//converts string to byte array as socket and pocket works with byte arguments 
 			byte buf[] = message.getBytes(); //conversion 
 			//checks if either or both IPaddress and Port number were entered correctly
